@@ -6,7 +6,6 @@ import json, requests
 from defmethod.viewsmethod import Querymethod, DataCheck, Currency
 from defmethod.Log import logger
 
-
 class CurrencyRoute(views.APIView, Currency):
     '''通用模式下-API接口视图类'''
 
@@ -31,7 +30,7 @@ class CurrencyRoute(views.APIView, Currency):
     # 接口请求处理，数据处理/规则处理
     def __requestprocess(self, path_a):
         logger.info(
-            '========\n请求类型={},地址={},报文={}'.format(self.request.method, self.request.path, self.request.data))
+            '{}\n请求类型={},地址={},报文={}'.format(50*'=',self.request.method, self.request.path, self.request.data))
         request_data = dict(self.request.GET) if self.request.method == 'GET' else dict(self.request.data)
         # 预留一个后门属性，如果有此test_data字段直接返回
         if Currency.test_data(request_data) != None:
@@ -39,7 +38,6 @@ class CurrencyRoute(views.APIView, Currency):
                 re_data = eval(request_data['test_data'][0])
             else:
                 re_data = request_data['test_data']
-            # re_data = request_data['test_data'][0] if self.request.method == 'GET' else request_data['test_data']
             return re_data
         # 获取路由id、条件匹配规则、必填及数据类型规则
         try:

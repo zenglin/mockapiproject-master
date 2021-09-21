@@ -22,10 +22,9 @@ from mockapi import views
 
 urlpatterns = [
     path(r'admin/mockapi/index/', views.IndexClass.index, name='index-test'),  # 接口测试页面
-    path('admin/', admin.site.urls),
-    path('api/mock/', include('mockapi.urls')),
-    path('api/test/', include('testapi.urls')),
+    path('admin/', admin.site.urls),#django后台管理页面路由
+    path('api/mock/', include('mockapi.urls')),#通用接口的路由
+    path('api/test/', include('testapi.urls')),#自定义接口的路由
 ]
-
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

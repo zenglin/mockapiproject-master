@@ -58,7 +58,7 @@ class APIResponseMock(models.Model):
     """
     CustomUrl = models.ForeignKey(RouteTabMock, on_delete=models.PROTECT, verbose_name='关联接口')
     UpdateTime = models.DateTimeField(auto_now=True, verbose_name='更新时间')
-    QueryValue = models.CharField(max_length=40, verbose_name='查询值')
+    QueryValue = models.CharField(max_length=50, db_index=True,verbose_name='查询值')
     ResponseData = models.TextField(verbose_name='响应信息数据')
 
     def clean(self):

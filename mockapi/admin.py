@@ -22,7 +22,6 @@ class RouteTabMockAdmin(admin.ModelAdmin):
         ("接口规则", {"fields": ['APIOnOff', 'APIRequired', 'ConditionValue']})
     ]
 
-
 admin.site.register(RouteTabMock, RouteTabMockAdmin)
 
 
