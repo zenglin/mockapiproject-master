@@ -95,7 +95,7 @@ class IndexClass(views.APIView):
 
     def index(request):
         status_code, result = "", ""
-        # 给请求类型判断是提交或是获取html资源
+        # 根据请求类型判断是提交或是获取html资源
         if request.method == 'POST':
             header = request.POST.get('header')
             url = request.POST.get('url', None)
