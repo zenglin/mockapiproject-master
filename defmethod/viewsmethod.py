@@ -4,7 +4,7 @@ from django.db.models import Q
 
 class Querymethod(object):
 
-    def match_value(self, databody, conditionValue):
+    def match_value(self, databody, conditionValue, req_type):
         '''
         依据接口设置匹配规则，获取请求参数中的value；以此作为查询条件
         :param databody: 接口请求参数数据-type=dict()
@@ -44,6 +44,7 @@ class Querymethod(object):
         else:
             logger.warning('未找到到匹配的数据值,匹配规则=' + str(conditionValue))
             re_data = False
+        re_data = re_data[0] if req_type == 'GET' else re_data
         return re_data
 
 

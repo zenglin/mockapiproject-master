@@ -68,7 +68,7 @@ class APIResponseMock(models.Model):
             raise ValidationError('输入的json数据不合法，请检查')
 
     class Meta:
-        unique_together = ('CustomUrl', 'QueryValue',)
+        unique_together = ('CustomUrl', 'QueryValue',)#数据库的联合约束
         verbose_name = 'Mock/接口响应数据表'
         verbose_name_plural = 'Mock/接口响应数据表'
 
