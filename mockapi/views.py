@@ -51,7 +51,7 @@ class CurrencyRoute(views.APIView, Currency):
         re_data = self.DataCheck.check(eval(apirequired), request_data)
         if re_data != True:
             return re_data
-        # 依据条件匹配规则，找到mock的条件查询值
+        # 依据条件匹配规则，找到入参对应的条件查询值
         QueryValue = Querymethod().match_value(request_data, conditionValue,self.request.method)
         # 如果无条件匹配规则，直接取该接口下最新的mock数据
         if QueryValue == False:
@@ -68,7 +68,7 @@ class CurrencyRoute(views.APIView, Currency):
             try:
                 con = self.Q_model(QueryValue, re_dataid)
                 getdb_data = APIResponseMock.objects.filter(con)
-                db_data = list(getdb_data.values())[0]['ResponseData']
+                db_data = list(getdb_data.values())[-1]['ResponseData']
                 re_data = json.loads(db_data)
             except Exception as ex:
                 msg = '未找到匹配值:' + str(QueryValue)
