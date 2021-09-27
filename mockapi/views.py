@@ -68,7 +68,7 @@ class CurrencyRoute(views.APIView, Currency):
             try:
                 con = self.Q_model(QueryValue, re_dataid)
                 getdb_data = APIResponseMock.objects.filter(con)
-                db_data = list(getdb_data.values())[0]['ResponseData']
+                db_data = list(getdb_data.values())[-1]['ResponseData']
                 re_data = json.loads(db_data)
             except Exception as ex:
                 msg = '未找到匹配值:' + str(QueryValue)
