@@ -60,6 +60,7 @@ class APIResponseMock(models.Model):
     UpdateTime = models.DateTimeField(auto_now=True, verbose_name='更新时间')
     QueryValue = models.CharField(max_length=50, db_index=True,verbose_name='查询值')
     ResponseData = models.TextField(verbose_name='响应信息数据')
+    Remarks = models.CharField(max_length=20, null=True, verbose_name='备注说明')
 
     def clean(self):
         try:

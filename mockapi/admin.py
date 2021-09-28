@@ -33,7 +33,7 @@ class APIResponseMockAdmin(admin.ModelAdmin):
     # 时间格式化处理
     time_seconds.admin_order_field = 'UpdateTime'
     time_seconds.short_description = '更新时间'
-    list_display = ['id', 'CustomUrl', 'QueryValue', 'reprofile', 'time_seconds']
+    list_display = ['id', 'CustomUrl', 'QueryValue', 'reprofile', 'time_seconds','Remarks']
     list_filter = ['CustomUrl']
     search_fields = ['CustomUrl__CustomUrl']
     # 执行动作的位置

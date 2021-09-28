@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3@qiwq!0o)t3^b%%s7v=*)y7xp^^ybef3wc3qqli8toe7i!ay=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -118,8 +118,16 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = 'static'
+# STATICFILES_DIRS = [
+#   os.path.join(BASE_DIR, '/static/'),
+# ]
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880 * 10  # 50M
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

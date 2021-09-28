@@ -5,30 +5,33 @@
     <title>API接口测试</title>
 </head>
 <body>
-    <h3 style="..."> *[Requests]</h3>
-    <form action="/admin/mockapi/index/" method="post">
-        <table>
-            <tr>
+<hr>
+<hr/>
+<h3 style="..."> *[请求模块]</h3>
+<form action="/admin/mockapi/index/" method="post">
+    <table>
+        <tr>
             <td>接口地址：</td>
             <td>
-                <input type="text" name="url" value="http://"  /> <br/>
+                <input type="text" name="url" value="http://" style="width:500px"/> <br/>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td>请求类型:</td>
             <td>
                 <input type="radio" name="req_type" value="post" checked/>POST
-                <input type="radio" name="req_type" value="get" />GET
+                <input type="radio" name="req_type" value="get"/>GET
             </td>
-            </tr>
-            </tr>
-            <tr>
+        </tr>
+        </tr>
+        <tr>
             <td>请求头:</td>
             <td>
-                <input type="text" name="header" value={"Content-Type":"application/json"}> <br/>
+                <input type="text" name="header" value={"Content-Type":"application/json"}
+                       style="width:500px;height:20px;"> <br/>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td>参数类型：</td>
             <td>
                 <select name="leixin">
@@ -37,39 +40,45 @@
                     <option value="date">Data</option>
                 </select>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td>请求报文:</td>
             <td>
-                <textarea name="requestsdata" style="with:800px;height:80px;"></textarea>
+                <textarea name="requestsdata" style="width:500px;height:100px;"></textarea>
             </td>
-            <tr>
+        <tr>
             <td>
-                <input type="submit" value="执行测试" />
+                <input id="submitBtn" type="submit" value="执行测试"/>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td>
-            <h3 style="..."> *[Response]</h3>
+                <hr>
+                <hr/>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
+            <td>
+                <h3 style="..."> *[响应模块]</h3>
+            </td>
+        </tr>
+        <tr>
             <td>接口响应码：</td>
             <td>
                 <label>{{ data }}</label><br/>
             </td>
-            </tr>
-            <tr>
+        </tr>
+        <tr>
             <td>接口返回值：</td>
             <td>
                 <table>
-            <tr>
-            <td width="800" style="word-break:break-all;">{{ data1 }}</td>
-            </tr>
-            </table>
+                    <tr>
+                        <td width="800" style="word-break:break-all;">{{ data1 }}</td>
+                    </tr>
+                </table>
             </td>
-            </tr>
-        </table>
-    </form>
+        </tr>
+    </table>
+</form>
 </body>
 </html>
