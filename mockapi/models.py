@@ -32,6 +32,8 @@ class RouteTabMock(models.Model):
                 json.loads(key_data)
         except json.JSONDecodeError as ex:
             raise ValidationError('[ {} ]输入的json数据不合法，请检查.'.format(json_data))
+        #兼容模型輸入的url前缀和后缀带斜杠(即会自动去除)
+        self.CustomUrl = models_fun().pathurl(self.CustomUrl)
 
     # 列表宽度显示限制,限制字段显示长度
     def routeprofile(self):
@@ -58,9 +60,9 @@ class APIResponseMock(models.Model):
     """
     CustomUrl = models.ForeignKey(RouteTabMock, on_delete=models.PROTECT, verbose_name='关联接口')
     UpdateTime = models.DateTimeField(auto_now=True, verbose_name='更新时间')
-    QueryValue = models.CharField(max_length=50, db_index=True,verbose_name='查询值')
+    QueryValue = models.CharField(max_length=50, db_index=True, verbose_name='查询值')
     ResponseData = models.TextField(verbose_name='响应信息数据')
-    Remarks = models.CharField(max_length=20, null=True, verbose_name='备注说明')
+    Remarks = models.CharField(max_length=20, blank=True, default='-', verbose_name='备注说明')
 
     def clean(self):
         try:
@@ -69,7 +71,7 @@ class APIResponseMock(models.Model):
             raise ValidationError('输入的json数据不合法，请检查')
 
     class Meta:
-        unique_together = ('CustomUrl', 'QueryValue',)#数据库的联合约束
+        unique_together = ('CustomUrl', 'QueryValue',)
         verbose_name = 'Mock/接口响应数据表'
         verbose_name_plural = 'Mock/接口响应数据表'
 
@@ -83,10 +85,12 @@ class APIResponseMock(models.Model):
     def __str__(self):
         return 'id:{}  路径:[ {} ] - 更新时间:{}'.format(self.id, self.CustomUrl, str(self.UpdateTime)[:19])
 
+
 class index(models.Model):
     """
     Mock-接口数据响应表模型
     """
+
     class Meta:
         verbose_name = '接口测试页面'
         verbose_name_plural = '接口测试页面'

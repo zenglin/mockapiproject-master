@@ -7,3 +7,7 @@ class models_fun(object):
             return '{}{}'.format(str(data)[0:intdata],dian)
         else:
             return str(data)
+    def pathurl(self,url):
+        url_a = url[:-1] if url[-1] == '/' else url
+        url_b = url_a[1:] if url_a[0] == '/' else url_a
+        return url_b
