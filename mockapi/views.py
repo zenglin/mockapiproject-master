@@ -54,8 +54,8 @@ class CurrencyRoute(views.APIView, Currency):
             return re_data
         # 依据条件匹配规则，找到入参对应的条件查询值
         QueryValue = Querymethod().match_value(request_data, conditionValue, self.request.method)
-        logger.info('条件匹配规则结果:'+str(QueryValue))
-        # 如果无条件匹配规则，直接取该接口下最新的mock数据
+        logger.info('条件匹配规则结果:{},取该接口下最新mock数据'.format(str(QueryValue)))
+        # 如无条件匹配规则，取该接口下最新mock数据
         if QueryValue == False:
             try:
                 getdb_data = APIResponseMock.objects.filter(CustomUrl_id=re_dataid)
