@@ -18,6 +18,10 @@ class Querymethod(object):
                 if type(values) == type({}) or str(values) in ('True', 'true'):
                     lista.append(keys)
                     True if str(values) in ('True', 'true') else key_list(values)
+                elif type(values) == type([]):
+                    lista.append(keys)
+                    lista.append(0)
+                    key_list(values[0], lista)
                 else:
                     if lista == []:
                         lista.append(keys)
@@ -97,11 +101,13 @@ class DataCheck(object):
         elif isinstance(check_a, list):
             for key_a in check_a:
                 if isinstance(key_a, dict):
-                    for x in range(len(key_a)):
-                        temp_key = list(key_a.keys())[x]
-                        temp_value = key_a[temp_key]
-                        self.key_list.append(temp_key)
-                        self.get_dict_allkeys(temp_value, dict_b)
+                    # for x in range(len(key_a)):
+                    # 递归到列表+元素位置0,即只支持列表第一个作为校验点
+                    temp_key = list(key_a.keys())[0]
+                    temp_value = key_a[temp_key]
+                    self.key_list.append(0)
+                    self.key_list.append(temp_key)
+                    self.get_dict_allkeys(temp_value, dict_b)
                 # 必填校验,兼容true,True
                 if str(key_a) in ('true', 'True'):
                     self.__value_type(dict_b, True)

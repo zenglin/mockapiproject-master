@@ -31,7 +31,7 @@ class CurrencyRoute(views.APIView, Currency):
     # 接口请求处理，数据处理/规则处理
     def __requestprocess(self, path_a):
         logger.info(
-            '{}\n请求类型={},地址={},报文={}'.format(50 * '=', self.request.method, self.request.path, self.request.data))
+            '{}\n请求类型={},地址={},报文={}'.format(80 * '=', self.request.method, self.request.path, self.request.data))
         request_data = dict(self.request.GET) if self.request.method == 'GET' else dict(self.request.data)
         # 预留一个后门属性，如果有此test_data字段直接返回
         if Currency.test_data(request_data) != None:
@@ -54,6 +54,7 @@ class CurrencyRoute(views.APIView, Currency):
             return re_data
         # 依据条件匹配规则，找到入参对应的条件查询值
         QueryValue = Querymethod().match_value(request_data, conditionValue, self.request.method)
+        logger.info('条件匹配规则结果:'+str(QueryValue))
         # 如果无条件匹配规则，直接取该接口下最新的mock数据
         if QueryValue == False:
             try:
