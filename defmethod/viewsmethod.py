@@ -72,7 +72,7 @@ class DataCheck(object):
         except KeyError:
             if type_a == True:
                 keys = str(keys)
-                keys = '列表无元素' if keys == '0' else keys
+                keys = 'list无元素' if keys == '0' else keys
                 raise ValueError('必填校验失败,缺少必要参数:' + keys)
 
     def check(self, check_a, dict_b):
