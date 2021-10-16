@@ -71,7 +71,9 @@ class DataCheck(object):
                 raise ValueError('[{}]字段类型校验失败，期望传入类型为:{}'.format(keys, type(type_a)))
         except KeyError:
             if type_a == True:
-                raise ValueError('必填校验失败,缺少必要参数:' + str(keys))
+                keys = str(keys)
+                keys = '列表无元素' if keys == '0' else keys
+                raise ValueError('必填校验失败,缺少必要参数:' + keys)
 
     def check(self, check_a, dict_b):
         try:
