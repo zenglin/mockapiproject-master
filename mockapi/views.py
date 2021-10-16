@@ -89,6 +89,7 @@ class CurrencyRoute(views.APIView, Currency):
         re_data = self.__requestprocess(args)
         return Response(re_data)
 
+    # Put请求方式
     def put(self, request, *args):
         re_data = self.__requestprocess(args)
         return Response(re_data)
