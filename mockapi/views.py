@@ -54,7 +54,7 @@ class CurrencyRoute(views.APIView, Currency):
             return re_data
         # 依据条件匹配规则，找到入参对应的条件查询值
         QueryValue = Querymethod().match_value(request_data, conditionValue, self.request.method)
-        logger.info('条件匹配规则结果:{},取该接口下最新mock数据'.format(str(QueryValue)))
+        logger.info('条件匹配规则结果:' + str(QueryValue))
         # 如无条件匹配规则，取该接口下最新mock数据
         if QueryValue == False:
             try:
@@ -89,6 +89,10 @@ class CurrencyRoute(views.APIView, Currency):
         re_data = self.__requestprocess(args)
         return Response(re_data)
 
+    def put(self, request, *args):
+        re_data = self.__requestprocess(args)
+        return Response(re_data)
+
 
 class IndexClass(views.APIView):
     '''接口测试页面视图'''
@@ -108,6 +112,8 @@ class IndexClass(views.APIView):
                 data = requests.post(url, json=requestsdata, headers=eval(header))
             elif req_type == 'get':
                 data = requests.get(url, headers=eval(header))
+            elif req_type == 'put':
+                data = requests.put(url, json=requestsdata, headers=eval(header))
             status_code = data.status_code
             result = data.json()
         return render(request, "index.html", {"data": status_code, "data1": result})

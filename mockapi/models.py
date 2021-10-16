@@ -9,7 +9,7 @@ class RouteTabMock(models.Model):
     Mock-路由URL表模型
     """
     ret_data = True
-    re_type = [("POST", "Post"), ("GET", "Get")]
+    re_type = [("POST", "Post"), ("GET", "Get"),("PUT","Put")]
     APIOnOff = models.BooleanField(default=True, verbose_name='接口启用状态')
     UrlType = models.CharField(max_length=6, choices=re_type, default="Post", verbose_name='请求方式')
     UrlName = models.CharField(max_length=20, db_index=True, unique=True, verbose_name='接口名称')
