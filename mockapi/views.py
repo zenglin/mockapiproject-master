@@ -120,7 +120,7 @@ class IndexClass(views.APIView):
                 data = requests.put(url, json=requedata, headers=eval(header))
             status_code = data.status_code
             result = data.json()
-            requedata = json.dumps(requedata)
+            requedata = json.dumps(requedata, ensure_ascii=False)
         return render(request, 'index.html',
                       {'status_code': status_code, 'result': result, 'url': url, 'header': header,
                        'requedata': requedata})
