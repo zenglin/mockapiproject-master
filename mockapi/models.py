@@ -9,7 +9,7 @@ class RouteTabMock(models.Model):
     Mock-路由URL表模型
     """
     ret_data = True
-    re_type = [("POST", "Post"), ("GET", "Get"),("PUT","Put")]
+    re_type = [("POST", "Post"), ("GET", "Get"), ("PUT", "Put")]
     APIOnOff = models.BooleanField(default=True, verbose_name='接口启用状态')
     UrlType = models.CharField(max_length=6, choices=re_type, default="Post", verbose_name='请求方式')
     UrlName = models.CharField(max_length=20, db_index=True, unique=True, verbose_name='接口名称')
@@ -32,7 +32,7 @@ class RouteTabMock(models.Model):
                 json.loads(key_data)
         except json.JSONDecodeError as ex:
             raise ValidationError('[ {} ]输入的json数据不合法，请检查.'.format(json_data))
-        #兼容模型輸入的url前缀和后缀带斜杠(即会自动去除)
+        # 兼容模型輸入的url前缀和后缀带斜杠(即会自动去除)
         self.CustomUrl = models_fun().pathurl(self.CustomUrl)
 
     # 列表宽度显示限制,限制字段显示长度

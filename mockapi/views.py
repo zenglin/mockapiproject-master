@@ -99,22 +99,28 @@ class IndexClass(views.APIView):
     '''接口测试页面视图'''
 
     def index(request):
-        status_code, result = "", ""
+        status_code = result = str()
+        url = 'http://'
+        header = '{"Content-Type":"application/json"}'
+        requedata = '{}'
         # 根据请求类型判断是提交或是获取html资源
         if request.method == 'POST':
             header = request.POST.get('header')
             url = request.POST.get('url', None)
             req_type = request.POST.get('req_type', None)
             try:
-                requestsdata = json.loads(request.POST.get('requestsdata'))
+                requedata = json.loads(request.POST.get('requedata'))
             except ValueError:
-                requestsdata = None
+                requedata = None
             if req_type == 'post':
-                data = requests.post(url, json=requestsdata, headers=eval(header))
+                data = requests.post(url, json=requedata, headers=eval(header))
             elif req_type == 'get':
                 data = requests.get(url, headers=eval(header))
             elif req_type == 'put':
-                data = requests.put(url, json=requestsdata, headers=eval(header))
+                data = requests.put(url, json=requedata, headers=eval(header))
             status_code = data.status_code
             result = data.json()
-        return render(request, "index.html", {"data": status_code, "data1": result})
+            requedata = json.dumps(requedata)
+        return render(request, 'index.html',
+                      {'status_code': status_code, 'result': result, 'url': url, 'header': header,
+                       'requedata': requedata})

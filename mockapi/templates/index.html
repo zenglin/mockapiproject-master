@@ -13,7 +13,7 @@
         <tr>
             <td>接口地址：</td>
             <td>
-                <input type="text" name="url" value="http://" style="width:500px"/> <br/>
+                <input type="text" name="url" value={{url}} style="width:500px"/> <br/>
             </td>
         </tr>
         <tr>
@@ -28,7 +28,7 @@
         <tr>
             <td>请求头:</td>
             <td>
-                <input type="text" name="header" value={"Content-Type":"application/json"}
+                <input type="text" name="header" value={{header}}
                        style="width:500px;height:20px;"> <br/>
             </td>
         </tr>
@@ -45,7 +45,7 @@
         <tr>
             <td>请求报文:</td>
             <td>
-                <textarea name="requestsdata" style="width:500px;height:100px;"></textarea>
+                <textarea name="requedata" style="width:500px;height:100px;">{{requedata}}</textarea>
             </td>
         <tr>
             <td>
@@ -66,7 +66,7 @@
         <tr>
             <td>接口响应码：</td>
             <td>
-                <label>{{ data }}</label><br/>
+                <label>{{ status_code }}</label><br/>
             </td>
         </tr>
         <tr>
@@ -74,7 +74,7 @@
             <td>
                 <table>
                     <tr>
-                        <td width="800" style="word-break:break-all;">{{ data1 }}</td>
+                        <td width="800" style="word-break:break-all;">{{ result }}</td>
                     </tr>
                 </table>
             </td>
