@@ -2,9 +2,10 @@ from rest_framework import views
 from rest_framework.response import Response
 from django.shortcuts import render
 from mockapi.models import *
-import json, requests
-from defmethod.viewsmethod import Querymethod, DataCheck, Currency
+from defmethod.viewsmethod import *
 from defmethod.Log import logger
+from defmethod.templatesmethod import tem_mark_safe
+import json, requests
 
 
 class CurrencyRoute(views.APIView, Currency):
@@ -100,14 +101,15 @@ class IndexClass(views.APIView):
 
     def index(request):
         status_code = result = str()
-        url = 'http://'
         header = '{"Content-Type":"application/json"}'
-        requedata = '{}'
+        url, requedata, req_type = 'http://', '{}', 'post'
         # 根据请求类型判断是提交或是获取html资源
         if request.method == 'POST':
             header = request.POST.get('header')
             url = request.POST.get('url', None)
             req_type = request.POST.get('req_type', None)
+            logger.info('{}\n接口测试页面调用:请求类型={},地址={}'.format(80 * '=', req_type, url))
+            requests.session().keep_alive = False #设置为短连接
             try:
                 requedata = json.loads(request.POST.get('requedata'))
             except ValueError:
@@ -115,12 +117,12 @@ class IndexClass(views.APIView):
             if req_type == 'post':
                 data = requests.post(url, json=requedata, headers=eval(header))
             elif req_type == 'get':
-                data = requests.get(url, headers=eval(header))
+                data = requests.get(url,params=requedata, headers=eval(header))
             elif req_type == 'put':
                 data = requests.put(url, json=requedata, headers=eval(header))
             status_code = data.status_code
-            result = data.json()
+            result = data.text # result = data.json()
             requedata = json.dumps(requedata, ensure_ascii=False)
         return render(request, 'index.html',
-                      {'status_code': status_code, 'result': result, 'url': url, 'header': header,
-                       'requedata': requedata})
+                      {'status_code': status_code, 'result': str(result), 'url': url, 'header': header,
+                       'req_type': tem_mark_safe(req_type), 'requedata': requedata})

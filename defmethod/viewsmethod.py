@@ -45,10 +45,10 @@ class Querymethod(object):
                     re_listdata.append(re_data)
                     lista.clear()
             re_data = re_listdata
+            re_data = re_data[0] if req_type == 'GET' else re_data
         else:
             logger.warning('未找到到匹配的数据值,匹配规则=' + str(conditionValue))
             re_data = False
-        re_data = re_data[0] if req_type == 'GET' else re_data
         return re_data
 
 
